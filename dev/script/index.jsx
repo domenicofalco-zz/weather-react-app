@@ -22,6 +22,7 @@ export class Main extends React.Component {
 		return (
 			//render Material UI components (example)
 			<div>
+				<h1>Material UI example component</h1>
 				<RaisedButtonExampleSimple label="Default" />
 			</div>
 		);
