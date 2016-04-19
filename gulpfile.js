@@ -52,3 +52,44 @@ gulp.task('server', ['scripts', 'less', 'html'], () => {
 
 // Defaul
 gulp.task('default', ['scripts', 'less', 'html']);
+
+
+/* +++++++++++++++++++++++++++++++++++++ */
+
+// Task: "gulp createjson"
+gulp.task('createjson', () => {
+
+    var fileSystem = require('fs')
+        , path = require('path')
+        , filePath = path.join(__dirname, './dev/data/city.list.json')
+        , tempJson = []
+        , tempObj = []
+        , json = []
+        , file = fileSystem.readFileSync(filePath, 'utf-8', function(err) {
+            console.log(err);
+        });
+
+    file = file.split("\n");
+
+    for(var i = 0; i < file.length-1; i++) {
+
+      var currentRow = file[i];
+
+      tempJson = JSON.parse(currentRow);
+
+      tempObj = {
+        name: tempJson.name,
+        country: tempJson.country
+      };
+
+      json.push(tempObj);
+    }
+
+    var finalJson = JSON.stringify(json).replace(/\\r/gm,'')
+        , outPath = path.join(__dirname, './dev/data/city.list.new.json');
+
+    fileSystem.writeFileSync(outPath, finalJson, 'utf8', function(err) {
+        console.log(err);
+    });
+
+});
