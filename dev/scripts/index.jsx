@@ -7,7 +7,9 @@ let appendSelector = document.getElementById('myApp');
 //main modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DisplayWeatherItem from './components/DisplayWeatherItem.jsx';
+
+//Components
+import SearchForm from './components/SearchForm';
 
 //API
 import API from './js/API';
@@ -29,8 +31,9 @@ export default class Main extends React.Component {
 
 	render() {
 		let { weatherData } = this.state;
+
 		return (
-			<DisplayWeatherItem data={weatherData} />
+			<SearchForm />
 		);
 
 	}
