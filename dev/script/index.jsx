@@ -5,26 +5,20 @@ require("../less/style.less")
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//Material UI components (example)
-import RaisedButtonExampleSimple from './components/buttonsExampleUiMaterial';
-
-//constants
-import { BASE_URI, TOKEN } from './js/constants';
+//API
+import API from './js/API';
 
 //React Main Class
 export class Main extends React.Component {
+
 	render() {
 
-		//APIs -> ToDo with promise
-		console.log(BASE_URI, TOKEN);
-		//
+		API.getWeather("Napoli,it").then(function(weatherData) {
+		  console.log(weatherData);
+		});
 
 		return (
-			//render Material UI components (example)
-			<div>
-				<h1>Material UI example component</h1>
-				<RaisedButtonExampleSimple label="Default" />
-			</div>
+			<div>test</div>
 		);
 	}
 }
