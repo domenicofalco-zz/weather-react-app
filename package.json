@@ -4,8 +4,8 @@
   "description": "weather app using openweathermap APIs",
   "main": "''",
   "scripts": {
-    "dev": "webpack-dev-server --progress --profile --colors --hot",
-    "build": "webpack --progress --profile --colors"
+    "dev": "gulp server",
+    "build": "gulp build"
   },
   "author": "Domenico Falco | Danilo Strazzullo",
   "license": "ISC",
