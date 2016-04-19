@@ -6,4 +6,4 @@
 4 - wait for your default browser to open \*<br>
 5 - start developing<br>
 
-\* <i style="font-size: 13px;">browserSync is enabled by this task. In case you do not want browserSync, run "gulp watch"</i>
+\* <i>browserSync is enabled by this task. In case you do not want browserSync, run "gulp watch"</i>
