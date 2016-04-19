@@ -1,7 +1,9 @@
+const jshint = require('gulp-jshint');
 const gulp = require('gulp');
 const webpack = require('webpack-stream');
 const browserSync = require('browser-sync').create();
 
+//Global gulp config
 const config = {
   productionUrl: './public/',
   devUrl: './dev/',
@@ -13,6 +15,7 @@ const config = {
   }
 }
 
+// Tasks
 gulp.task('scripts', () => {
   gulp.src(`${config.devUrl}scripts/`)
     .pipe(webpack(require('./webpack.config.js')))
@@ -30,14 +33,19 @@ gulp.task('html', () => {
     .pipe(gulp.dest(config.productionUrl))
 });
 
-gulp.task('watch', ['scripts', 'less', 'html'], config.watcher());
+/* TODO: JShint task */
 
+// Watcher
+gulp.task('watch', ['scripts', 'less', 'html', 'lint'], config.watcher());
+
+// BrowserSync
 gulp.task('server', ['scripts', 'less', 'html'], () => {
   browserSync.init({
       server: config.productionUrl
   });
-  config.watcher();
+
   gulp.watch(`${config.productionUrl}**/*`).on('change', browserSync.reload);
 });
 
+// Defaul
 gulp.task('default', ['scripts', 'less', 'html']);
