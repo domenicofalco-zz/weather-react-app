@@ -6,6 +6,7 @@ function getWeather(searchKey){
 
   let url = `${BASE_URI}${QUERY}${searchKey}&appid=${TOKEN}`;
   let request = new XMLHttpRequest();
+
   return new Promise((resolve, reject) => {
 
     request.open('GET', url, true);
@@ -21,6 +22,7 @@ function getWeather(searchKey){
     }
 
     request.send();
+
   });
 }
 
