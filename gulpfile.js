@@ -39,7 +39,7 @@ gulp.task('build', () => {});
 */
 
 // Watcher
-gulp.task('watch', ['scripts', 'less', 'html', 'lint'], config.watcher());
+gulp.task('watch', ['scripts', 'less', 'html'], config.watcher());
 
 // BrowserSync
 gulp.task('server', ['scripts', 'less', 'html'], () => {
