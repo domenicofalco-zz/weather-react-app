@@ -29,7 +29,6 @@ export default class Main extends React.Component {
 
 	render() {
 		let { weatherData } = this.state;
-
 		return (
 			<DisplayWeatherItem data={weatherData} />
 		);
