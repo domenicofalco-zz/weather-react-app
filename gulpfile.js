@@ -33,7 +33,10 @@ gulp.task('html', () => {
     .pipe(gulp.dest(config.productionUrl))
 });
 
-/* TODO: JShint task */
+/* TODO: JShint & Gulp Build task
+gulp.task('JShint', () => {});
+gulp.task('build', () => {});
+*/
 
 // Watcher
 gulp.task('watch', ['scripts', 'less', 'html', 'lint'], config.watcher());
