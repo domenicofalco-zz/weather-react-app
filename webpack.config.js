@@ -3,19 +3,18 @@ var path = require('path');
 
 module.exports = {
 	entry: [
-		'./dev/script/index.jsx'
+		'babel-polyfill',
+		['.', 'dev', 'scripts', 'index.jsx'].join(path.sep)
 	],
-	output: {
-		path: path.join(__dirname, 'public/js'),
-		filename: 'bundle.js'
-	},
-	devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
 	resolve: {
-    alias: {
-			/* risolve i conflitti di duplicazione del modulo react nei vari componenti */
-      'react': path.join(__dirname, 'node_modules', 'react')
+		modulesDirectories: ['node_modules'],
+		alias: {
+      'react':[__dirname, 'node_modules', 'react'].join(path.sep)
     },
 		extensions: ['', '.js', '.jsx']
+	},
+	output: {
+		filename: 'bundle.js'
 	},
 	module: {
 		loaders: [
@@ -32,11 +31,5 @@ module.exports = {
 				loader: 'style!css!less'
 			}
 		]
-	},
-	devServer: {
-		contentBase: "./public",
-		noInfo: true,
-		hot: true,
-		inline: true
 	}
 };
