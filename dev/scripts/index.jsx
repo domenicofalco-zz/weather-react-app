@@ -20,7 +20,7 @@ export default class Main extends React.Component {
 
 	constructor(){
 		super();
-		this.state = { weatherData: {} };
+		this.state = { weatherData: {} }
 	}
 
 	componentWillMount() {

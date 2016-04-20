@@ -1,11 +1,9 @@
-import { BASE_URI, QUERY, TOKEN } from "./constants";
+import { BASE_URI, QUERY, TOKEN } from './constants';
 
-let API = { getWeather };
+function getWeather(searchKey) {
 
-function getWeather(searchKey){
-
-  let url = `${BASE_URI}${QUERY}${searchKey}&appid=${TOKEN}`;
-  let request = new XMLHttpRequest();
+  const url = `${BASE_URI}${QUERY}${searchKey}&appid=${TOKEN}`;
+  const request = new XMLHttpRequest();
 
   return new Promise((resolve, reject) => {
 
@@ -18,12 +16,14 @@ function getWeather(searchKey){
     };
 
     request.onerror = () => {
-      reject(new Error("Error fetching posts"));
-    }
+      reject(new Error('Error fetching posts'));
+    };
 
     request.send();
 
   });
 }
+
+const API = { getWeather };
 
 export default API;
