@@ -59,6 +59,10 @@ gulp.task('html', () => {
 gulp.task('build', () => {});
 */
 
+gulp.task('build', () => {
+  /* TODO: Gulp Build task */
+});
+
 // Watcher
 gulp.task('watch', ['scripts', 'less', 'html'], () => {
   globalFunctions.watcher();

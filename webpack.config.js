@@ -17,6 +17,7 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	module: {
+		devtool: null,
 		loaders: [
 			{
         test: /\.jsx?$/,
@@ -32,4 +33,13 @@ module.exports = {
 			}
 		]
 	}
+	/*FOR PRODUCTION
+	plugins:[
+    new webpack.optimize.UglifyJsPlugin({
+      compress:{
+        mangle: false,
+				source: false
+      }
+    })
+  ]*/
 };
