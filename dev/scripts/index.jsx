@@ -9,6 +9,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 //Components
+import DisplayWeather from './components/DisplayWeatherItem';
 import SearchForm from './components/SearchForm';
 
 //API
@@ -25,12 +26,22 @@ export default class Main extends React.Component {
 	componentWillMount() {
 		//ToDo (Mimmo): rendere lo "state: luogo" dinamico
 		API.getWeather("Napoli,it").then((data) => {
-			this.setState({ weatherData: data });
+			this.setState({
+				weatherData: {
+					city: data.name,
+					country: data.sys.country,
+					status: data.weather[0].main
+				}
+			});
 		});
 	}
 
 	render() {
 		let { weatherData } = this.state;
+
+		// TODO (Danilo) - dinamically generate 'DisplayWeather' component
+		// after submitting SearchForm
+		// <DisplayWeather data={weatherData} />
 
 		return (
 			<SearchForm />

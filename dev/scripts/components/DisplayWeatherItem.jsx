@@ -11,12 +11,16 @@ export default class DisplayWeather extends React.Component {
 
 	render() {
 
-    var { data } = this.props;
-
-    console.log('Object Weather ->', data);
+    let { data } = this.props;
+    console.log(data.city, data.country);
 
 		return (
-			<div>Chil Component</div>
+			<div className="weather-item" ref="weatherItem">
+        <ul>
+          <li><strong>Location:</strong> {data.city}, {data.country}</li>
+          <li><strong>Status:</strong> {data.status}</li>
+        </ul>
+      </div>
 		);
 
 	}
