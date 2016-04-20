@@ -19,13 +19,13 @@ export default class Main extends React.Component {
 
 	constructor(){
 		super();
-		this.state = { weatherData: {} };
+		this.state = { weatherData: {} }
 	}
 
 	componentWillMount() {
 		//ToDo (Mimmo): rendere lo "state: luogo" dinamico
 		API.getWeather("Napoli,it").then((data) => {
-			this.setState({ weatherData: data });
+			this.setState({ weatherData: data })
 		});
 	}
 
