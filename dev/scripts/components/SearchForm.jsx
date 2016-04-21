@@ -1,6 +1,5 @@
-//main modules
+// main modules
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 // import AutoComplete from 'material-ui/lib/auto-complete';
@@ -10,22 +9,22 @@ import RaisedButton from 'material-ui/lib/raised-button';
  */
 export default class SearchForm extends React.Component {
 
-  constructor(props){
-		super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
-  submit(event) {
+  handleSubmit(event) {
     event.preventDefault();
-    let locationField = this.refs.locationField;
-    let location = locationField.getValue();
+    const locationField = this.refs.locationField;
+    const location = locationField.getValue();
 
     // TODO (Danilo) - next time send the location to the API
+    console.log(location);
 
     this.refs.searchForm.reset();
   }
 
-	render() {
-
+  render() {
     // TODO (Danilo) - use Material-UI's AutoComplete Component
     // --- SEE BELOW ---
     // <AutoComplete
@@ -35,25 +34,24 @@ export default class SearchForm extends React.Component {
     //   dataSource={LOCATION}
     // />
 
-		return (
-			<form className="search-form" ref="searchForm" onSubmit={this.submit.bind(this)}>
-        <div>
-          <TextField
-            ref="locationField"
-            id="location"
-            hintText="ex. London"
-            floatingLabelText="Type a location"
-          />
+    return (
+      <form className="search-form" ref="searchForm" onSubmit={this.handleSubmit.bind(this)}>
+          <div>
+            <TextField
+              ref="locationField"
+              id="location"
+              hintText="ex. London"
+              floatingLabelText="Type a location"
+            />
         </div>
         <div className="buttons-set">
-          <RaisedButton type="submit" label="Search" primary={true} />
+          <RaisedButton type="submit" label="Search" primary />
         </div>
       </form>
-		);
-
-	}
+    );
+  }
 
 }
 
 SearchForm.defaultProps = { data: {} };
-SearchForm.propTypes = { data: React.PropTypes.object }
+SearchForm.propTypes = { data: React.PropTypes.object };
