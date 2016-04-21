@@ -69,7 +69,7 @@ gulp.task('watch', ['scripts', 'less', 'html'], () => {
 });
 
 // BrowserSync
-gulp.task('server', ['scripts', 'less', 'html'], () => {
+gulp.task('server', ['watch'], () => {
   browserSync.init({
     server: config.productionUrl,
   });
