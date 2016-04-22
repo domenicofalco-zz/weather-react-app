@@ -1,27 +1,19 @@
-// main modules
 import React from 'react';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 // import AutoComplete from 'material-ui/lib/auto-complete';
 
-/**
- * SearchForm Component
- */
 export default class SearchForm extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   handleSubmit(event) {
     event.preventDefault();
-    const locationField = this.refs.locationField;
-    const location = locationField.getValue();
+    const searchForm = document.querySelector('.search-form');
+    const location = document.getElementById('location').value;
 
     // TODO (Danilo) - next time send the location to the API
     console.log(location);
 
-    this.refs.searchForm.reset();
+    searchForm.reset();
   }
 
   render() {
@@ -35,7 +27,7 @@ export default class SearchForm extends React.Component {
     // />
 
     return (
-      <form className="search-form" ref="searchForm" onSubmit={this.handleSubmit.bind(this)}>
+      <form className="search-form" ref="searchForm" onSubmit={this.handleSubmit}>
           <div>
             <TextField
               ref="locationField"

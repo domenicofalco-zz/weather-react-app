@@ -1,12 +1,10 @@
 import { BASE_URI, QUERY, TOKEN } from './constants';
 
 function getWeather(searchKey) {
-
   const url = `${BASE_URI}${QUERY}${searchKey}&appid=${TOKEN}`;
   const request = new XMLHttpRequest();
 
   return new Promise((resolve, reject) => {
-
     request.open('GET', url, true);
 
     request.onload = () => {
@@ -20,7 +18,6 @@ function getWeather(searchKey) {
     };
 
     request.send();
-
   });
 }
 
