@@ -21,6 +21,8 @@ const globalFunctions = {
     gulp.watch('./dev/scripts/**/*.js', ['scripts']);
     gulp.watch('./dev/scripts/**/*.jsx', ['scripts']);
     gulp.watch('./dev/**/*.html', ['html']);
+
+    // activate eslint if required
     if (argv.c === 'uselint') {
       this.lint();
     }
@@ -74,12 +76,11 @@ gulp.task('server', ['watch'], () => {
     server: config.productionUrl,
   });
 
-  // activate eslint if required
-  if (argv.c === 'uselint') {
-    globalFunctions.lint();
-  }
+  // gulp watch
+  globalFunctions.watcher();
 
-  gulp.watch(`${config.productionUrl}**/*`).on('change', browserSync.reload);
+  // reload browser
+  gulp.watch(`${config.productionUrl}**/*.*`).on('change', browserSync.reload);
 });
 
 // Defaul
