@@ -1,42 +1,29 @@
-//generale CSS
-require("../less/style.less")
+// generale CSS
+require('../less/style.less');
 
-//DOM selector
-let appendSelector = document.getElementById('myApp');
-
-//main modules
+// main modules
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//Components
+// Components
 import SearchForm from './components/SearchForm';
 
-//API
-import API from './js/API';
+// DOM selector
+const appendSelector = document.getElementById('myApp');
 
-//React Main Class
+// React Main Class
 export default class Main extends React.Component {
 
-	constructor(){
-		super();
-		this.state = { weatherData: {} }
-	}
+  render() {
+    // TODO (Danilo) - dinamically generate 'DisplayWeather' component
+    // after submitting SearchForm
+    // <DisplayWeather data={weatherData} />
 
-	componentWillMount() {
-		//ToDo (Mimmo): rendere lo "state: luogo" dinamico
-		API.getWeather("Napoli,it").then((data) => {
-			this.setState({ weatherData: data })
-		});
-	}
+    return (
+      <SearchForm />
+    );
+  }
 
-	render() {
-		let { weatherData } = this.state;
-
-		return (
-			<SearchForm />
-		);
-
-	}
 }
 
-appendSelector && ReactDOM.render(<Main/>, appendSelector);
+appendSelector && ReactDOM.render(<Main />, appendSelector);

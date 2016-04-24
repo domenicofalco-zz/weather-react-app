@@ -1,59 +1,83 @@
-//main modules
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
-// import AutoComplete from 'material-ui/lib/auto-complete';
+import CityAutocomplete from './Autocomplete';
+import DisplayWeatherItem from './DisplayWeatherItem';
 
-/**
- * SearchForm Component
- */
+// API
+import API from '../js/API';
+
 export default class SearchForm extends React.Component {
 
-  constructor(props){
-		super(props);
-	}
-
-  submit(event) {
-    event.preventDefault();
-    let locationField = this.refs.locationField;
-    let location = locationField.getValue();
-
-    // TODO (Danilo) - next time send the location to the API
-
-    this.refs.searchForm.reset();
+  constructor() {
+    super();
+    this.state = {
+      inputFieldSearch: null,
+      hasLoaded: false,
+      weatherData: {},
+    };
+    this._updateInputField = this._updateInputField.bind(this);
+    this._submitForm = this._submitForm.bind(this);
   }
 
-	render() {
+  _submitForm(e) {
+    e.preventDefault();
 
-    // TODO (Danilo) - use Material-UI's AutoComplete Component
-    // --- SEE BELOW ---
-    // <AutoComplete
-    //   hintText="ex. London"
-    //   floatingLabelText="Type a location"
-    //   filter={AutoComplete.fuzzyFilter}
-    //   dataSource={LOCATION}
-    // />
+    if (this.state.inputFieldSearch) {
+      // TODO: Try to move this FN in a dedicated js file
+      API.getWeather(this.state.inputFieldSearch).then((data) => {
+        this.setState({
+          hasLoaded: false,
+          weatherData: {
+            city: data.name,
+            country: data.sys.country,
+            status: data.weather[0].main,
+          },
+        }, () => {
+          this.setState({
+            hasLoaded: true,
+          });
+        });
+        //
+      });
+    }
+  }
 
-		return (
-			<form className="search-form" ref="searchForm" onSubmit={this.submit.bind(this)}>
-        <div>
-          <TextField
-            ref="locationField"
-            id="location"
-            hintText="ex. London"
-            floatingLabelText="Type a location"
+  _localStorage() {
+    // TODO: save "this.state.inputFieldSearch" in localStorage
+  }
+
+  _updateInputField(value) {
+    // TODO: this state will update the
+    // AutoComplete request to fullfill the dropdown-city
+    // and this FN is already  called onInputChange
+    this.setState({
+      inputFieldSearch: value,
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <form className="search-form" ref="searchForm" onSubmit={this._submitForm}>
+          <div>
+            <CityAutocomplete
+              updateInputField={this._updateInputField}
+            />
+          </div>
+          <div className="buttons-set">
+            <RaisedButton type="submit" label="Search" primary />
+          </div>
+        </form>
+        {this.state.hasLoaded &&
+          <DisplayWeatherItem
+            weather={this.state.weatherData}
           />
-        </div>
-        <div className="buttons-set">
-          <RaisedButton type="submit" label="Search" primary={true} />
-        </div>
-      </form>
-		);
-
-	}
+        }
+      </div>
+    );
+  }
 
 }
 
-SearchForm.defaultProps = { data: {} };
-SearchForm.propTypes = { data: React.PropTypes.object }
+// SearchForm.defaultProps = { data: {} };
+// SearchForm.propTypes = { data: React.PropTypes.object };
