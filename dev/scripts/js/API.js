@@ -1,7 +1,11 @@
-import { BASE_URI, QUERY, TOKEN } from './constants';
+import {
+  WEATHER_URI,
+  WEATHER_QUERY,
+  WEATHER_TOKEN,
+} from './constants';
 
 function getWeather(searchKey) {
-  const url = `${BASE_URI}${QUERY}${searchKey}&appid=${TOKEN}`;
+  const url = `${WEATHER_URI}${WEATHER_QUERY}${searchKey}&appid=${WEATHER_TOKEN}`;
   const request = new XMLHttpRequest();
 
   return new Promise((resolve, reject) => {

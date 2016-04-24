@@ -91,7 +91,7 @@ gulp.task('default', ['scripts', 'less', 'html']);
 
 // Task: "gulp createjson"
 gulp.task('createjson', () => {
-  const filePath = path.join(__dirname, `${config}data/city.list.json`);
+  const filePath = path.join(__dirname, `${config.devUrl}data/city.list.json`);
   const json = [];
   let file = fileSystem.readFileSync(filePath, 'utf-8', (err) => {
     throw err;
