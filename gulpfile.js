@@ -8,6 +8,8 @@ const browserSync = require('browser-sync').create();
 const eslint = require('gulp-eslint');
 const friendlyFormatter = require('eslint-friendly-formatter');
 const argv = require('yargs').argv;
+const http = require('http');
+
 
 // Global gulp config
 const config = {
@@ -63,6 +65,15 @@ gulp.task('build', () => {});
 
 gulp.task('build', () => {
   /* TODO: Gulp Build task */
+});
+
+gulp.task('serverForWatcher', () => {
+  http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World\n');
+  }).listen(1337, '127.0.0.1');
+
+  console.log('Server running at http://127.0.0.1:1337/');
 });
 
 // Watcher

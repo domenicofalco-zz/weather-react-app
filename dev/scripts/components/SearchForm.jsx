@@ -1,10 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
 import CityAutocomplete from './Autocomplete';
-
-
-// API
-import API from '../js/API';
+import GetWeather from '../js/getWeather';
 
 export default class SearchForm extends React.Component {
 
@@ -21,28 +18,14 @@ export default class SearchForm extends React.Component {
   _submitForm(e) {
     e.preventDefault();
     const { inputFieldSearch } = this.state;
-    let { updateWeatherState } = this.props;
+    const { updateWeatherState } = this.props;
 
     if (inputFieldSearch) {
-      // TODO: Try to move this FN in a dedicated js file
-      API.getWeather(inputFieldSearch).then((data) => {
-        this.setState({
-          hasLoaded: false,
-          weatherData: {
-            city: data.name,
-            country: data.sys.country,
-            status: data.weather[0].main,
-          },
-        }, () => {
-          updateWeatherState(this.state.weatherData);
-        });
-        //
+      this.setState({
+        inputFieldSearch,
+        weatherData: GetWeather.getDataFromAPI(inputFieldSearch, updateWeatherState),
       });
     }
-  }
-
-  _localStorage() {
-    // TODO: save "this.state.inputFieldSearch" in localStorage
   }
 
   _updateInputField(value) {

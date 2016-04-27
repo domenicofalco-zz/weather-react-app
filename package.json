@@ -36,6 +36,7 @@
     "material-ui": "^0.14.4",
     "redux": "^3.4.0",
     "style-loader": "0.13.1",
+    "underscore": "^1.8.3",
     "url-loader": "0.5.7",
     "webpack": "1.12.14",
     "webpack-dev-server": "1.14.1",
