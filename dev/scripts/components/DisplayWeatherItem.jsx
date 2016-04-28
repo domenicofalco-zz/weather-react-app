@@ -3,13 +3,17 @@ import React from 'react';
 export default class DisplayWeatherItem extends React.Component {
 
   render() {
-    const { weather } = this.props;
-    const { city, country, status } = weather;
+    const { data } = this.props;
+    const { name, sys, weather } = data;
+    const { country } = sys;
+    const status = weather[0].description;
+
+    window.test = weather;
 
     return (
       <div className="weather-item" ref="weatherItem">
         <ul>
-          <li><strong>Location:</strong> {city}, {country}</li>
+          <li><strong>Location:</strong> {name}, {country}</li>
           <li><strong>Status:</strong> {status}</li>
         </ul>
       </div>
@@ -18,5 +22,5 @@ export default class DisplayWeatherItem extends React.Component {
 
 }
 
-DisplayWeatherItem.defaultProps = { weather: {} };
-DisplayWeatherItem.propTypes = { weather: React.PropTypes.object };
+DisplayWeatherItem.defaultProps = { data: {} };
+DisplayWeatherItem.propTypes = { data: React.PropTypes.object };
