@@ -8,10 +8,10 @@ import ReactDOM from 'react-dom';
 // Components
 import SearchForm from './components/SearchForm';
 import DisplayWeatherItem from './components/DisplayWeatherItem';
-import Error from './components/Error.jsx';
+// import Error from './components/Error.jsx';
 
 import LocalStorage from './js/localStorage.js';
-import GetWeather from './js/getWeather';
+import API from './js/API';
 
 // DOM selector
 const appendSelector = document.getElementById('myApp');
@@ -33,37 +33,45 @@ export default class Main extends React.Component {
 
   componentWillMount() {
     this.availableCities = LocalStorage.getItem('cities');
+
+    if (this.availableCities) {
+      const cities = this.availableCities.split(',');
+
+      for (let i = 0; i < cities.length; i++) {
+        API.getWeather(cities[i]).then((data) => {
+          this._updateWeatherState(data);
+        }).catch(() => {
+          // in order to show the error message
+          // this._updateWeatherState(null);
+        });
+      }
+    }
   }
 
   _updateWeatherState(data) {
-    /*this.setState({
+    this.setState({
       weatherData: data,
       hasLoaded: true,
-    });*/
+    });
   }
 
   render() {
     // let { weatherData, hasLoaded } = this.state;
-    const cities = this.availableCities.split(',');
-    const citiesList = [];
-
-    for (let i = 0; i < cities.length; i++) {
-      let data = GetWeather.getDataFromAPI(cities[i]);
-      citiesList.push(<DisplayWeatherItem weather={data} />);
-    }
-
     /* {(hasLoaded && weatherData)
-        && <TemplateList />
-        || <Error />
+    && <DisplayWeatherItem weather={weatherData} />
+    || <Error />
     }*/
+
+    let { weatherData } = this.state;
 
     return (
       <div>
         <SearchForm
           updateWeatherState={this._updateWeatherState}
         />
-      {citiesList}
-
+        {weatherData &&
+          <DisplayWeatherItem data={weatherData} />
+        }
       </div>
     );
   }
