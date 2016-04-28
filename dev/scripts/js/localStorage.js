@@ -16,11 +16,12 @@ function getItem(searchKey) {
 
 function setItem(searchKey, value) {
   const citiesStored = getItem(searchKey);
+  const city = value.toUpperCase();
 
   if (localStorage.length === 0) {
-    localStorage.setItem(searchKey, value);
-  } else if (!_isAlreadyStored(citiesStored, value)) {
-    localStorage.setItem(searchKey, `${value},${citiesStored}`);
+    localStorage.setItem(searchKey, city);
+  } else if (!_isAlreadyStored(citiesStored, city)) {
+    localStorage.setItem(searchKey, `${city},${citiesStored}`);
   }
 }
 
