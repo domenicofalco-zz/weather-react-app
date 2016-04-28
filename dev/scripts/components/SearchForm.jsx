@@ -1,7 +1,9 @@
 import React from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
 import CityAutocomplete from './Autocomplete';
-import GetWeather from '../js/getWeather';
+
+import LocalStorage from '../js/localStorage.js';
+import API from '../js/API';
 
 export default class SearchForm extends React.Component {
 
@@ -21,9 +23,12 @@ export default class SearchForm extends React.Component {
     const { updateWeatherState } = this.props;
 
     if (inputFieldSearch) {
-      this.setState({
-        inputFieldSearch,
-        weatherData: GetWeather.getDataFromAPI(inputFieldSearch, updateWeatherState),
+      API.getWeather(inputFieldSearch).then((data) => {
+        updateWeatherState(data);
+        LocalStorage.setItem('cities', inputFieldSearch);
+      }).catch(() => {
+        // in order to show the error message
+        // updateWeatherState(null);
       });
     }
   }
