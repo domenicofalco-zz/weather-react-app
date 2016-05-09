@@ -2,7 +2,6 @@ import React from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
 import CityAutocomplete from './Autocomplete';
 
-
 // API
 import API from '../js/API';
 
@@ -21,22 +20,19 @@ export default class SearchForm extends React.Component {
   _submitForm(e) {
     e.preventDefault();
     const { inputFieldSearch } = this.state;
-    let { updateWeatherState } = this.props;
+    const { addWeatherItem } = this.props;
 
     if (inputFieldSearch) {
+      // this.refs.searchForm.reset();
+
       // TODO: Try to move this FN in a dedicated js file
       API.getWeather(inputFieldSearch).then((data) => {
-        this.setState({
-          hasLoaded: false,
-          weatherData: {
-            city: data.name,
-            country: data.sys.country,
-            status: data.weather[0].main,
-          },
-        }, () => {
-          updateWeatherState(this.state.weatherData);
-        });
-        //
+        const item = {
+          city: data.name,
+          country: data.sys.country,
+          status: data.weather[0].main,
+        };
+        addWeatherItem(item);
       });
     }
   }
@@ -73,5 +69,7 @@ export default class SearchForm extends React.Component {
 
 }
 
-// SearchForm.defaultProps = { data: {} };
-SearchForm.propTypes = { updateWeatherState: React.PropTypes.func.isRequired };
+SearchForm.propTypes = {
+  addWeatherItem: React.PropTypes.func.isRequired,
+  updateWeatherState: React.PropTypes.func.isRequired
+};
